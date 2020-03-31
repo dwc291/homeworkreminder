@@ -68,11 +68,11 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 1. as non-registered user, I can register a new account with the site.
 2. as a user, I can log in to the site.
-3. as a user, I can create a homework list, classes list and exam list.
-4. as a user, I can view all of the homeworks exams or classes as a single list.
-5. as a user, I can view homeworks or exams by class.
-5. as a user, I can add homeworks, exams or classes to its corresponding existing list.
-6. as a user, I can cross off homeworks and exams in its corresponding existing list.
+3. as a user, I can create a classes list.
+4. as a user, I can add homeworks or exams to the class list.
+5. as a user, I can view all of the homeworks, exams or classes on a single page.
+6. as a user, I can view homeworks or exams by class on a single page.
+8. as a user, I can cross off homeworks and exams in the classes list.
 
 ## Research Topics
 
@@ -88,5 +88,5 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## Annotations / References Used
 
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
+1. [passport.js authentication docs](http://passportjs.org/docs)
 
