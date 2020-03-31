@@ -1,53 +1,44 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(___TODO__: your project name_)
-
-# Shoppy Shoperson 
+# Homework Reminder
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
+Keeping track of all your homeworks, projects and exams can be stressful. It's easy to forget something and miss a deadline. That's where Homework Reminder comes in.
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
-
+Homework Reminder is a web app that allows users to keep track of all their homeworks/projects and exams. Users can register and login. Once logged in, they can add the different classes they are taking, and a list of homeworks or projects with their due dates. Once they are done with the homework, they can be checked off and will no longer show on their list. They will be able to view their homeworks by class or all of them on a single page. They can also add exam dates which they can check on a seperate page.
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
+The application will store Users, Classes, Homeworks and Exams
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(___TODO__: sample documents_)
+* users will have multiple lists of classes
+* each list will contain homeworks and exams for that specific class by embedding
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: "dwc291",
   hash: // a password hash,
   lists: // an array of references to List documents
 }
 ```
 
-An Example List with Embedded Items:
+An Example Class List with Embedded Homeworks and Exams:
 
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
+  className: "AIT",
+  homeworks: [
+    { name: "Final Project", dueDate: "04/01/2020", checked: false},
+    { name: "Homework 6", dueDate: "04/01/2020", checked: true},
   ],
-  createdAt: // timestamp
+  exams: [
+    { name: "Midterm", date: "03/30/2020", checked: true},
+    { name: "Final", date: "05/11/2020", checked: false},
+  ]
 }
 ```
-
 
 ## [Link to Commented First Draft Schema](db.js) 
 
@@ -77,31 +68,22 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
-1. as non-registered user, I can register a new account with the site
-2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+1. as non-registered user, I can register a new account with the site.
+2. as a user, I can log in to the site.
+3. as a user, I can create a homework list, classes list and exam list.
+4. as a user, I can view all of the homeworks exams or classes as a single list.
+5. as a user, I can view homeworks or exams by class.
+5. as a user, I can add homeworks, exams or classes to its corresponding existing list.
+6. as a user, I can cross off homeworks and exams in its corresponding existing list.
 
 ## Research Topics
 
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
-
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+* (3 points) Perform client side form validation using custom JavaScript
+    * I'm going to write my own code for client side form validation
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+8 points total out of 8 required points
 
 
 ## [Link to Initial Main Project File](app.js) 
@@ -110,8 +92,5 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
-
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
 
