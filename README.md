@@ -40,9 +40,7 @@ An Example Class List with Embedded Homeworks and Exams:
 }
 ```
 
-## [Link to Commented First Draft Schema](db.js) 
-
-https://github.com/nyu-csci-ua-0480-008-spring-2020/dwc291-final-project/blob/0efd70f120f19c2ec285a71d775f568acf42aa42/src/db.js#L2
+## [Link to Commented First Draft Schema](https://github.com/nyu-csci-ua-0480-008-spring-2020/dwc291-final-project/blob/0efd70f120f19c2ec285a71d775f568acf42aa42/src/db.js#L2) 
 
 ## Wireframes
 
@@ -86,9 +84,7 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 8 points total out of 8 required points
 
 
-## [Link to Initial Main Project File](app.js) 
-
-https://github.com/nyu-csci-ua-0480-008-spring-2020/dwc291-final-project/blob/0efd70f120f19c2ec285a71d775f568acf42aa42/src/app.js#L1
+## [Link to Initial Main Project File](https://github.com/nyu-csci-ua-0480-008-spring-2020/dwc291-final-project/blob/0efd70f120f19c2ec285a71d775f568acf42aa42/src/app.js#L1) 
 
 ## Annotations / References Used
 
