@@ -44,19 +44,33 @@ An Example Class List with Embedded Homeworks and Exams:
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+/login - page for logging in and signing up
 
-/list/create - page for creating a new shopping list
+![Login Page](documentation/login.png)
 
-![list create](documentation/list-create.png)
+/homeworks - page listing all homeworks
 
-/list - page for showing all shopping lists
+![List of Homeworks](documentation/homeworks)
 
-![list](documentation/list.png)
+/homeworks/add - form for adding homeworks
 
-/list/slug - page for showing specific shopping list
+![Form for adding Homeworks](documentation/add-homework.png)
 
-![list](documentation/list-slug.png)
+/classes - page listing all classes
+
+![List of Classes](documentation/classes.png)
+
+/classes/add - form for adding classes
+
+![Form for adding Classes](documentation/add-class.png)
+
+/exams - page for listing all exmas
+
+![List of Exams](documentation/exams.png)
+
+/exams/add - form for adding exams
+
+![Form for adding Exams](documentation/add-exam.png)
 
 ## Site map
 
