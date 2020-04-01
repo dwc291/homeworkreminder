@@ -50,7 +50,7 @@ An Example Class List with Embedded Homeworks and Exams:
 
 /homeworks - page listing all homeworks
 
-![List of Homeworks](documentation/homeworks)
+![List of Homeworks](documentation/homeworks.png)
 
 /homeworks/add - form for adding homeworks
 
@@ -83,7 +83,8 @@ An Example Class List with Embedded Homeworks and Exams:
 3. as a user, I can create a classes list.
 4. as a user, I can add homeworks or exams to the class list.
 5. as a user, I can view all of the homeworks, exams or classes on a single page.
-6. as a user, I can view homeworks or exams by class on a single page.
+6. as a user, I can filter homeworks or exams by class.
+7. as a user, I can filter homeworks by completed homeworks.
 8. as a user, I can cross off homeworks and exams in the classes list.
 
 ## Research Topics
