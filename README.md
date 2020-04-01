@@ -60,7 +60,7 @@ An Example Class List with Embedded Homeworks and Exams:
 
 ## Site map
 
-![Site Map](documentation/Site Map.jpg)
+![Site Map](documentation/site-map.jpg)
 
 ## User Stories or Use Cases
 
