@@ -14,7 +14,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+const User = mongoose.model('User');
 const Class = mongoose.model('Class');
+const Homework = mongoose.model('Homework');
+const Exam = mongoose.model('Exam');
 
 passport.use(new LocalStrategy(
     function(username, password, done) {

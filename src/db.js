@@ -40,7 +40,10 @@ const Class = new mongoose.Schema({
   exams: [Exam]
 });
 
+mongoose.model('User', User);
 mongoose.model('Class', Class);
+mongoose.model('Homework', Homework);
+mongoose.model('Exam', Exam);
 
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
 let dbconf;
