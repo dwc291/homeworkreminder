@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 // * so users have a username and password
 // * they also can have 0 or more lists
 const User = new mongoose.Schema({
-  // username provided by authentication plugin
-  // password hash provided by authentication plugin
+  username: String,
+  // password hash
   classes:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }]
 });
 

@@ -20,32 +20,57 @@ const Homework = mongoose.model('Homework');
 const Exam = mongoose.model('Exam');
 
 passport.use(new LocalStrategy(
-    function(username, password, done) {
-      User.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        return done(null, user);
-      });
-    }
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
 ));
 
 app.get('/login', function(req, res){
-    res.render('login');
+  res.render('login');
 });
 
 app.post('/login', passport.authenticate('local', { 
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true 
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true 
 }));
 
 app.post('/signup', function(req, res){
-
+  console.log(req.body.user)
+  User.findOne({username: req.body.username}, function(err, obj){
+    if(err){
+      console.log('Error', err)
+    }
+    else{
+      if(obj){
+        console.log('User already exists');
+        res.redirect('/login')
+      }
+      else{
+        if(req.body.password === req.body.passwordcheck){
+          new User({
+            username: req.body.user
+            //password: hash
+          }).save(function(err){
+            console.log('Account successfully created.')
+            res.redirect('/login');
+          });
+        }
+        else{
+          console.log('Passwords do not match');
+        }
+      }
+    }
+  })
 });
 
 app.get('/classes/add', function(req, res){
@@ -53,6 +78,7 @@ app.get('/classes/add', function(req, res){
 });
 
 app.post('/classes/add', function(req, res){
+
   new Class({
     user: user,//to be implemented after authentication has been implemented
     name: req.body.Class
