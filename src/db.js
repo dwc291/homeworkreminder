@@ -1,16 +1,5 @@
 //db.js
-// 1ST DRAFT DATA MODEL
 const mongoose = require('mongoose');
-
-// users
-// * our site requires authentication...
-// * so users have a username and password
-// * they also can have 0 or more lists
-const User = new mongoose.Schema({
-  username: String,
-  // password hash
-  classes:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }]
-});
 
 // homeworks within a class
 // * includes the due date of the homework
@@ -34,10 +23,19 @@ const Exam = new mongoose.Schema({
 // * each list must have a related user
 // * a list can have 0 or more homeworks or exams
 const Class = new mongoose.Schema({
-  user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   name: {type: String, required: true},
   homeworks: [Homework],
   exams: [Exam]
+});
+
+// users
+// * our site requires authentication...
+// * so users have a username and password
+// * they also can have 0 or more lists
+const User = new mongoose.Schema({
+  username: String,
+  password: String,
+  classes:  [Class]
 });
 
 mongoose.model('User', User);

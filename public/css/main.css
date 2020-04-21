@@ -42,3 +42,8 @@ h1 {
     text-align: left;
     margin: 10px;
 }
+
+p {
+    font-size: 10px;
+    color: red;
+}

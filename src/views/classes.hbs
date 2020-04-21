@@ -1,0 +1,16 @@
+<div class="nav">
+    <a href='/classes'>Classes</a>
+    <a href='/homeworks'>Homeworks</a>
+    <a href='/exams'>Exams</a>
+    <a href='/signout'>Signout</a>
+</div>
+
+<div class='main'>
+    <h2>Classes</h2>
+    <div clase='class'>
+        <a href='/classes/add'>Add</a>
+        {{#each classes}}
+            <h3>{{this.name}}</h3>
+        {{/each}}
+    </div>
+</div>
