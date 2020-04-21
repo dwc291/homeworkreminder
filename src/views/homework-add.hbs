@@ -1,0 +1,19 @@
+<div class="nav">
+    <a href='/classes'>Classes</a>
+    <a href='/homeworks'>Homeworks</a>
+    <a href='/exams'>Exams</a>
+    <a href='/signout'>Signout</a>
+</div>
+
+<div class='main'>
+    <h2>Add Homework</h2>
+    <form method='POST' action='/classes/add'>
+        <label for="class">Class:</label>
+        <input type="text" id="class" name="class"><br><br>
+        <label for="homework">Homework:</label>
+        <input type="text" id="homework" name="homework"><br><br>
+        <label for="duedate">Due Date:</label>
+        <input type="text" id="duedate" name="duedate"><br><br>
+        <input type="submit" value="Add">
+    </form>
+</div>

@@ -112,6 +112,10 @@ app.get('/homeworks', function(req, res){
   res.render('homeworks');
 });
 
+app.get('/homeworks/add', function(req, res){
+  res.render('homework-add');
+});
+
 app.get('/classes', function(req, res){
   User.findOne({username: req.user}, function(err, obj){
     const classes = obj['classes'];
