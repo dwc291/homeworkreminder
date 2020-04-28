@@ -24,9 +24,6 @@ app.use(passport.session());
 app.use(flash());
 
 const User = mongoose.model('User');
-const Class = mongoose.model('Class');
-const Homework = mongoose.model('Homework');
-const Exam = mongoose.model('Exam');
 
 let idCounter = 1;
 
@@ -102,7 +99,7 @@ app.post('/signup', function(req, res){
           req.flash('signup', 'Username already exists');
           res.redirect('login');
         }
-        else{
+        else {
           req.flash('signup', 'Account successfully created');
           bcrypt.hash(req.body.password, 10, function(err, hash){
             new User({
@@ -123,7 +120,7 @@ app.get('/homeworks', function(req, res){
     User.findOne({username: req.user}, function(err, obj){
       const classes = obj['classes'];
       let homeworks = obj['homeworks'];
-      let homeworksSorted = [];
+      const homeworksSorted = [];
       for(let i=0; i<obj['homeworks'].length; i++){
         if(req.query.class === homeworks[i].class|| req.query.class === "All" || req.query.class === undefined){
           if(!homeworks[i].checked){
@@ -183,7 +180,7 @@ app.post('/homeworks/add', function(req, res){
         }}
       }, function(err, obj){
         idCounter ++;
-        res.redirect('/homeworks')
+        res.redirect('/homeworks');
       }
     );
   }
@@ -213,7 +210,7 @@ app.get('/exams', function(req, res){
     User.findOne({username: req.user}, function(err, obj){
       const classes = obj['classes'];
       let exams = obj['exams'];
-      let examsSorted = [];
+      const examsSorted = [];
       for(let i=0; i<obj['exams'].length; i++){
         if(req.query.class === exams[i].class || req.query.class === "All" || req.query.class === undefined){
           if(!exams[i].checked){
@@ -273,7 +270,7 @@ app.post('/exams/add', function(req, res){
         }}
       }, function(err, obj){
         idCounter ++;
-        res.redirect('/exams')
+        res.redirect('/exams');
       }
     );
   }
@@ -332,7 +329,7 @@ app.post('/classes/add', function(req, res){
           name:req.body.class
         }}
       }, function(err, obj){
-        res.redirect('/classes')
+        res.redirect('/classes');
       }
     );
   }
