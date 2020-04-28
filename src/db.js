@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 // * includes the due date of the homework
 // * homeworks can be checked off when done
 const Homework = new mongoose.Schema({
+  _id: String,
+  class: String,
   name: {type: String, required: true},
   dueDate: {type: Date, required: true},
   checked: {type: Boolean, default: false, required: true}
@@ -14,6 +16,8 @@ const Homework = new mongoose.Schema({
 // * includes the date of the exam
 // * exams can be checked off when done
 const Exam = new mongoose.Schema({
+    _id: String,
+    class: String,
     name: {type: String, required: true},
     date: {type: Date, required: true},
     checked: {type: Boolean, default: false, required: true}
@@ -24,8 +28,6 @@ const Exam = new mongoose.Schema({
 // * a list can have 0 or more homeworks or exams
 const Class = new mongoose.Schema({
   name: {type: String, required: true},
-  homeworks: [Homework],
-  exams: [Exam]
 });
 
 // users
@@ -35,7 +37,9 @@ const Class = new mongoose.Schema({
 const User = new mongoose.Schema({
   username: String,
   password: String,
-  classes:  [Class]
+  classes:  [Class],
+  homeworks: [Homework],
+  exams: [Exam]
 });
 
 mongoose.model('User', User);

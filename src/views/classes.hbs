@@ -1,16 +1,21 @@
-<div class="nav">
-    <a href='/classes'>Classes</a>
-    <a href='/homeworks'>Homeworks</a>
-    <a href='/exams'>Exams</a>
-    <a href='/signout'>Signout</a>
-</div>
-
-<div class='main'>
-    <h2>Classes</h2>
-    <div clase='class'>
-        <a href='/classes/add'>Add</a>
-        {{#each classes}}
-            <h3>{{this.name}}</h3>
-        {{/each}}
+<nav class="nav nav-pills nav-fill">
+    <a class="nav-item nav-link" href="/homeworks">Homeworks</a>
+    <a class="nav-item nav-link" href="/exams">Exams</a>
+    <a class="nav-item nav-link active" href="/classes">Classes</a>
+    <a class="nav-item nav-link" href="/logout">Logout</a>
+</nav>
+<br>
+<br>
+<div class='row justify-content-center'>
+    <div class="col-sm-6">
+        <h4>Classes</h4>
+        <br>
+        <ul class="list-group">
+            {{#each classes}}
+                <li class="list-group-item">{{this.name}}</li>
+            {{/each}}
+        </ul>
+        <br>
+        <a href="/classes/add" class="btn btn-info" role="button">Add Class</a>
     </div>
 </div>

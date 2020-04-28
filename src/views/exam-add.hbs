@@ -1,6 +1,6 @@
 <nav class="nav nav-pills nav-fill">
-    <a class="nav-item nav-link active" href="/homeworks">Homeworks</a>
-    <a class="nav-item nav-link" href="/exams">Exams</a>
+    <a class="nav-item nav-link" href="/homeworks">Homeworks</a>
+    <a class="nav-item nav-link active" href="/exams">Exams</a>
     <a class="nav-item nav-link" href="/classes">Classes</a>
     <a class="nav-item nav-link" href="/logout">Logout</a>
 </nav>
@@ -8,9 +8,9 @@
 <br>
 <div class='row justify-content-center'>
     <div class='col-sm-6'>
-        <h4>Add Homework</h4>
+        <h4>Add Exam</h4>
         <br>
-        <form class="form-horizontal" method='POST' action='/homeworks/add'>
+        <form class="form-horizontal" method='POST' action='/exams/add'>
             <div class="form-group">
                 <label class="control-label" for="class">Class:</label>
                 <div class="col-sm-10">
@@ -22,15 +22,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label" for="homework">Homework:</label>
+                <label class="control-label" for="homework">Exam:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" id="homework" name="homework">
+                    <input class="form-control" type="text" id="exam" name="exam">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label" for="duedate">Due Date:</label>
+                <label class="control-label" for="date">Date:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" id="duedate" name="duedate" placeholder="mm/dd/yyyy">
+                    <input class="form-control" type="text" id="date" name="date" placeholder="mm/dd/yyyy">
                 </div>
             </div>
             <p class='text-danger'>{{formMess}}</p>

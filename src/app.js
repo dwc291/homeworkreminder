@@ -28,6 +28,8 @@ const Class = mongoose.model('Class');
 const Homework = mongoose.model('Homework');
 const Exam = mongoose.model('Exam');
 
+let idCounter = 1;
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
@@ -55,6 +57,15 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(user, done) {
   done(null, user);
+});
+
+app.get('/', function(req,res){
+  if(req.isAuthenticated()){
+    res.redirect('/homeworks');
+  }
+  else{
+    res.redirect('/login');
+  }
 });
 
 app.get('/login', function(req, res){
@@ -98,7 +109,6 @@ app.post('/signup', function(req, res){
               username: req.body.username,
               password: hash
             }).save(function(err){
-              console.log('Account successfully created.')
               res.redirect('/login');
             });
           });
@@ -109,34 +119,228 @@ app.post('/signup', function(req, res){
 });
 
 app.get('/homeworks', function(req, res){
-  res.render('homeworks');
+  if(req.isAuthenticated()){
+    User.findOne({username: req.user}, function(err, obj){
+      const classes = obj['classes'];
+      let homeworks = obj['homeworks'];
+      let homeworksSorted = [];
+      for(let i=0; i<obj['homeworks'].length; i++){
+        if(req.query.class === homeworks[i].class|| req.query.class === "All" || req.query.class === undefined){
+          if(!homeworks[i].checked){
+            homeworksSorted.push(homeworks[i]);
+          }
+        }
+      }
+      homeworks = homeworksSorted.sort((a,b) => b.dueDate - a.dueDate);
+      res.render('homeworks', {homeworks: homeworks, classes: classes});
+    });
+  }
+  else{
+    res.render('unauthorized');
+  }
 });
 
 app.get('/homeworks/add', function(req, res){
-  res.render('homework-add');
+  if(req.isAuthenticated()){
+    User.findOne({username: req.user}, function(err, obj){
+      const message = req.flash();
+      const classes = obj['classes'];
+      res.render('homework-add', {classes: classes, formMess: message['form']});
+    });
+  }
+  else{
+    res.render('unauthorized');
+  }
+});
+
+app.post('/homeworks/add', function(req, res){
+  const re = new RegExp("^(((0?[1-9]|1[012])/(0?[1-9]|1\\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\\d)\\d{2}|0?2/29/((19|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$");
+  if(!req.body.class){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/homeworks/add');
+  }
+  else if(!req.body.homework){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/homeworks/add');
+  }
+  else if(!req.body.duedate){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/homeworks/add');
+  }
+  else if(!re.test(req.body.duedate)){
+    req.flash('form', 'Invalid date');
+    res.redirect('/homeworks/add');
+  }
+  else{
+    User.findOneAndUpdate({username: req.user},
+      {$push: 
+        {homeworks: {
+          _id: idCounter,
+          class: req.body.class,
+          name: req.body.homework,
+          dueDate: req.body.duedate,
+          checked: false
+        }}
+      }, function(err, obj){
+        idCounter ++;
+        res.redirect('/homeworks')
+      }
+    );
+  }
+});
+
+app.post('/homeworks/update', function(req,res){
+  if(!Array.isArray(req.body.checked)){
+    User.findOneAndUpdate({username: req.user, 'homeworks._id':req.body.checked}, {$set :
+      {'homeworks.$.checked': true}}, function(err, obj){
+        console.log(obj);
+      });
+    res.redirect('/homeworks');
+  }
+  else{
+    req.body.checked.forEach(function(id) {
+      User.findOneAndUpdate({username: req.user, 'homeworks._id':id}, {$set :
+        {'homeworks.$.checked': true}}, function(err, obj){
+          console.log(obj);
+        });
+    });
+    res.redirect('/homeworks');
+  }
+});
+
+app.get('/exams', function(req, res){
+  if(req.isAuthenticated()){
+    User.findOne({username: req.user}, function(err, obj){
+      const classes = obj['classes'];
+      let exams = obj['exams'];
+      let examsSorted = [];
+      for(let i=0; i<obj['exams'].length; i++){
+        if(req.query.class === exams[i].class || req.query.class === "All" || req.query.class === undefined){
+          if(!exams[i].checked){
+            examsSorted.push(exams[i]);
+          }
+        }
+      }
+      exams = examsSorted.sort((a,b) => b.date - a.date);
+      res.render('exams', {exams: exams, classes: classes});
+    });
+  }
+  else{
+    res.render('unauthorized');
+  }
+});
+
+app.get('/exams/add', function(req, res){
+  if(req.isAuthenticated()){
+    User.findOne({username: req.user}, function(err, obj){
+      const message = req.flash();
+      const classes = obj['classes'];
+      res.render('exam-add', {classes: classes, formMess: message['form']});
+    });
+  }
+  else{
+    res.render('unauthorized');
+  }
+});
+
+app.post('/exams/add', function(req, res){
+  const re = new RegExp("^(((0?[1-9]|1[012])/(0?[1-9]|1\\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\\d)\\d{2}|0?2/29/((19|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$");
+  if(!req.body.class){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/exams/add');
+  }
+  else if(!req.body.exam){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/exams/add');
+  }
+  else if(!req.body.date){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/exams/add');
+  }
+  else if(!re.test(req.body.date)){
+    req.flash('form', 'Invalid date');
+    res.redirect('/exams/add');
+  }
+  else{
+    User.findOneAndUpdate({username: req.user},
+      {$push: 
+        {exams: {
+          _id: idCounter,
+          class: req.body.class,
+          name: req.body.exam,
+          date: req.body.date,
+          checked: false
+        }}
+      }, function(err, obj){
+        idCounter ++;
+        res.redirect('/exams')
+      }
+    );
+  }
+});
+
+app.post('/exams/update', function(req,res){
+  if(!Array.isArray(req.body.checked)){
+    User.findOneAndUpdate({username: req.user, 'exams._id':req.body.checked}, {$set :
+      {'exams.$.checked': true}}, function(err,obj){
+        console.log(obj);
+      });
+    res.redirect('/exams');
+  }
+  else{
+    req.body.checked.forEach(function(id) {
+      User.findOneAndUpdate({username: req.user, 'exams._id':id}, {$set :
+        {'exams.$.checked': true}}, function(err, obj){
+          console.log(obj);
+        });
+    });
+    res.redirect('/exams');
+  }
 });
 
 app.get('/classes', function(req, res){
-  User.findOne({username: req.user}, function(err, obj){
-    const classes = obj['classes'];
-    res.render('classes', {classes: classes});
-  });
+  if(req.isAuthenticated()){
+    User.findOne({username: req.user}, function(err, obj){
+      const classes = obj['classes'];
+      res.render('classes', {classes: classes});
+    });
+  }
+  else{
+    res.render('unauthorized');
+  }
 });
 
 app.get('/classes/add', function(req, res){
-  res.render('class-add');
+  if(req.isAuthenticated()){
+    const message = req.flash();
+    res.render('class-add', {formMess: message['form']});
+  }
+  else{
+    res.render('unauthorized');
+  }
 });
 
 app.post('/classes/add', function(req, res){
-  User.findOneAndUpdate({username: req.user},
-    {$push: 
-      {classes: {
-        name:req.body.class
-      }}
-    }, function(err, obj){
-      res.redirect('/classes')
-    }
-  );
+  if(!req.body.class){
+    req.flash('form', 'Fields cannot be empty');
+    res.redirect('/classes/add');
+  }
+  else{
+    User.findOneAndUpdate({username: req.user},
+      {$push: 
+        {classes: {
+          name:req.body.class
+        }}
+      }, function(err, obj){
+        res.redirect('/classes')
+      }
+    );
+  }
+});
+
+app.get("/logout", function(req, res){
+  req.logOut();
+  res.redirect('/login');
 });
 
 app.listen(process.env.PORT || 3000);

@@ -1,6 +1,6 @@
 <nav class="nav nav-pills nav-fill">
-    <a class="nav-item nav-link active" href="/homeworks">Homeworks</a>
-    <a class="nav-item nav-link" href="/exams">Exams</a>
+    <a class="nav-item nav-link" href="/homeworks">Homeworks</a>
+    <a class="nav-item nav-link active" href="/exams">Exams</a>
     <a class="nav-item nav-link" href="/classes">Classes</a>
     <a class="nav-item nav-link" href="/logout">Logout</a>
 </nav>
@@ -8,9 +8,9 @@
 <br>
 <div class="row justify-content-center">
     <div class="col-sm-6">
-        <h4>Homeworks</h4>
+        <h4>Exams</h4>
         <br>
-        <form class="form-horizontal" method="GET" action="/homeworks">
+        <form class="form-horizontal" method="GET" action="/exams">
             <div class="form-row">
                 <div>
                     <label class="col-sm-2 control-label" for="class">Class:</label>
@@ -32,30 +32,30 @@
                 </div>
             </div>
         </form>
-        <form method="POST" action="/homeworks/update">
+        <form method="POST" action="/exams/update">
         <table class='table'>
             <thead>
                 <tr>
-                    <th>Homework</th>
+                    <th>Exam</th>
                     <th>Class</th>
-                    <th>Due Date</th>
+                    <th>Date</th>
                     <th>Completed?</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each homeworks}}
+                {{#each exams}}
                     <tr>
                         <td>{{this.name}}</td>
                         <td>{{this.class}}</td>
-                        <td>{{this.dueDate}}</td>
+                        <td>{{this.date}}</td>
                         <td><input type="checkbox" value={{this._id}} id='checked' name='checked'></td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
-        <div class="row">
+        <div class='row'>
             <div class="col-sm-auto">
-                <a href="/homeworks/add" class="btn btn-info" role="button">Add Homework</a>
+                <a href="/exams/add" class="btn btn-info" role="button">Add Exam</a>
             </div>
             <div class="form-group">
                 <div class="col-sm-1">
